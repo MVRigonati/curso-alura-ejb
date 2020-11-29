@@ -23,7 +23,7 @@ public class AgendamentoEmailServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		PrintWriter pw = resp.getWriter();
-		this.servico.list().forEach(email -> pw.print("Email disponível: " + email));
+		this.servico.list().forEach(email -> pw.print("Email disponível: " + email.getEmail()));
 	}
 	
 }

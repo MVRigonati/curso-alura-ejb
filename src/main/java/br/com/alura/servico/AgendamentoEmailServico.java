@@ -3,12 +3,19 @@ package br.com.alura.servico;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
+
+import br.com.alura.dao.AgendamentoEmailDao;
+import br.com.alura.entidade.AgendamentoEmail;
 
 @Stateless
 public class AgendamentoEmailServico {
 
-	public List<String> list() {
-		return List.of("joao@alura.com.br");
+	@Inject
+	private AgendamentoEmailDao dao;
+	
+	public List<AgendamentoEmail> list() {
+		return this.dao.findAll();
 	}
 	
 }
