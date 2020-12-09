@@ -15,6 +15,7 @@ public class AgendamentoEmail {
 	private String assunto;
 	private String email;
 	private Boolean agendado;
+	private String mensagem;
 
 	public String getAssunto() {
 		return assunto;
@@ -38,6 +39,14 @@ public class AgendamentoEmail {
 
 	public void setAgendado(Boolean agendado) {
 		this.agendado = agendado;
+	}
+	
+	public String getMensagem() {
+		return mensagem;
+	}
+	
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
 	}
 
 	@Override

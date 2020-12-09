@@ -18,4 +18,9 @@ public class AgendamentoEmailServico {
 		return this.dao.findAll();
 	}
 	
+	public void inserir(AgendamentoEmail email) {
+		email.setAgendado(false);
+		this.dao.inserir(email);
+	}
+	
 }

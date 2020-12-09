@@ -18,5 +18,9 @@ public class AgendamentoEmailDao {
 		return this.entityManager.createQuery("SELECT ae FROM AgendamentoEmail ae", AgendamentoEmail.class)
 				.getResultList();
 	}
+	
+	public void inserir(AgendamentoEmail email) {
+		this.entityManager.persist(email);
+	}
 
 }
