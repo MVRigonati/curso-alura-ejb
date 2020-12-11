@@ -1,6 +1,7 @@
 package br.com.alura.servico;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -11,6 +12,8 @@ import br.com.alura.entidade.AgendamentoEmail;
 @Stateless
 public class AgendamentoEmailServico {
 
+	private static final Logger LOGGER = Logger.getLogger(AgendamentoEmailServico.class.getName());
+	
 	@Inject
 	private AgendamentoEmailDao dao;
 	
@@ -21,6 +24,24 @@ public class AgendamentoEmailServico {
 	public void inserir(AgendamentoEmail email) {
 		email.setAgendado(false);
 		this.dao.inserir(email);
+	}
+	
+	public List<AgendamentoEmail> listarNaoEnviados() {
+		return this.dao.listarNaoAgendados();
+	}
+	
+	public void alterarAgendamentoEmailParaAgendado(AgendamentoEmail agendamentoEmail) {
+		agendamentoEmail.setAgendado(true);
+		this.dao.alterar(agendamentoEmail);
+	}
+	
+	public void enviar(AgendamentoEmail email) {
+		try {
+			Thread.sleep(2000);
+			LOGGER.info("Email enviado para " + email.getEmail());
+		} catch (Exception ex) {
+			LOGGER.warning(ex.toString());
+		}
 	}
 	
 }

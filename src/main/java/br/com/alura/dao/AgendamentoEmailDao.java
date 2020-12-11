@@ -22,5 +22,15 @@ public class AgendamentoEmailDao {
 	public void inserir(AgendamentoEmail email) {
 		this.entityManager.persist(email);
 	}
+	
+	public List<AgendamentoEmail> listarNaoAgendados() {
+		return this.entityManager
+				.createQuery("SELECT ae FROM AgendamentoEmail ae WHERE ae.agendado = FALSE", AgendamentoEmail.class)
+				.getResultList();
+	}
+	
+	public void alterar(AgendamentoEmail agendamentoEmail) {
+		this.entityManager.merge(agendamentoEmail);
+	}
 
 }
