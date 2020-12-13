@@ -8,6 +8,7 @@ import javax.ejb.Singleton;
 import javax.inject.Inject;
 import javax.jms.JMSConnectionFactory;
 import javax.jms.JMSContext;
+import javax.jms.JMSException;
 import javax.jms.Queue;
 
 import br.com.alura.servico.AgendamentoEmailServico;
@@ -31,12 +32,27 @@ public class AgendarEmailJob {
 	public void agendarEmailsSolicitados() {
 		
 		LOGGER.info("Chamando Job agendarEmailsSolicitados");
+		
+		Queue queue = extractQueue();
+		
 		this.servico.listarNaoEnviados()
 		.forEach(email -> {
 			this.context.createProducer().send(queue, email);
 			this.servico.alterarAgendamentoEmailParaAgendado(email);
 		});
 		
+	}
+
+	/**
+	 * This is an alternative to get the queue.
+	 * 
+	 * @return The same object as
+	 * "<code>@Resource(mappedName = "java:/jms/queue/EmailQueue") private Queue queue;</code>"
+	 * 
+	 */
+	private Queue extractQueue() {
+		Queue queue = this.context.createQueue("EmailQueue");
+		return queue;
 	}
 	
 }
