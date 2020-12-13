@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import br.com.alura.dao.AgendamentoEmailDao;
+import br.com.alura.dao.AgendamentoEmailDaoExampleTransaction;
 import br.com.alura.entidade.AgendamentoEmail;
 
 @Stateless
@@ -16,6 +17,9 @@ public class AgendamentoEmailServico {
 	
 	@Inject
 	private AgendamentoEmailDao dao;
+	
+	@Inject
+	private AgendamentoEmailDaoExampleTransaction daoExample;
 	
 	public List<AgendamentoEmail> list() {
 		return this.dao.findAll();
@@ -32,7 +36,7 @@ public class AgendamentoEmailServico {
 	
 	public void alterarAgendamentoEmailParaAgendado(AgendamentoEmail agendamentoEmail) {
 		agendamentoEmail.setAgendado(true);
-		this.dao.alterar(agendamentoEmail);
+		this.daoExample.alterar(agendamentoEmail);
 	}
 	
 	public void enviar(AgendamentoEmail email) {

@@ -8,7 +8,6 @@ import javax.ejb.Singleton;
 import javax.inject.Inject;
 import javax.jms.JMSConnectionFactory;
 import javax.jms.JMSContext;
-import javax.jms.JMSException;
 import javax.jms.Queue;
 
 import br.com.alura.servico.AgendamentoEmailServico;
