@@ -10,7 +10,7 @@ import javax.jms.JMSConnectionFactory;
 import javax.jms.JMSContext;
 import javax.jms.Queue;
 
-import br.com.alura.servico.AgendamentoEmailServico;
+import br.com.alura.service.AgendamentoEmailService;
 
 @Singleton
 public class AgendarEmailJob {
@@ -18,7 +18,7 @@ public class AgendarEmailJob {
 	private static final Logger LOGGER = Logger.getLogger(AgendarEmailJob.class.getName());
 	
 	@Inject
-	private AgendamentoEmailServico servico;
+	private AgendamentoEmailService service;
 	
 	@Inject
 	@JMSConnectionFactory("java:jboss/DefaultJMSConnectionFactory")
@@ -30,14 +30,14 @@ public class AgendarEmailJob {
 	@Schedule(hour = "*", minute = "*", second = "*/10")
 	public void agendarEmailsSolicitados() {
 		
-		LOGGER.info("Chamando Job agendarEmailsSolicitados");
+		LOGGER.info("Calling job agendarEmailsSolicitados");
 		
 		Queue queue = extractQueue();
 		
-		this.servico.listarNaoEnviados()
+		this.service.listNotScheduled()
 		.forEach(email -> {
 			this.context.createProducer().send(queue, email);
-			this.servico.alterarAgendamentoEmailParaAgendado(email);
+			this.service.changeAgendamentoEmailToScheduled(email);
 		});
 		
 	}

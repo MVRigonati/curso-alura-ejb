@@ -9,8 +9,8 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 
-import br.com.alura.entidade.AgendamentoEmail;
-import br.com.alura.servico.AgendamentoEmailServico;
+import br.com.alura.entity.AgendamentoEmail;
+import br.com.alura.service.AgendamentoEmailService;
 
 @MessageDriven(activationConfig = {
 		@ActivationConfigProperty(
@@ -25,17 +25,17 @@ public class AgendamentoEmailMDB implements MessageListener {
 	private static final Logger LOGGER = Logger.getLogger(AgendamentoEmailMDB.class.getName());
 
 	@Inject
-	private AgendamentoEmailServico servico;
+	private AgendamentoEmailService service;
 
 	@Override
 	public void onMessage(Message message) {
 		try {
 			
 			final AgendamentoEmail agendamentoEmail = message.getBody(AgendamentoEmail.class);
-			this.servico.enviar(agendamentoEmail);
+			this.service.sendEmail(agendamentoEmail);
 			
 		} catch (final JMSException ex) {
-			LOGGER.warning("Erro ao enviar email");
+			LOGGER.warning("Exception when sending email");
 			LOGGER.warning(ex.toString());
 			throw new RuntimeException(ex);
 		}

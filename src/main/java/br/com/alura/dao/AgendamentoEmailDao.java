@@ -6,7 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import br.com.alura.entidade.AgendamentoEmail;
+import br.com.alura.entity.AgendamentoEmail;
 
 @Stateless
 public class AgendamentoEmailDao {
@@ -15,21 +15,22 @@ public class AgendamentoEmailDao {
 	private EntityManager entityManager;
 	
 	public List<AgendamentoEmail> findAll() {
-		return this.entityManager.createQuery("SELECT ae FROM AgendamentoEmail ae", AgendamentoEmail.class)
+		return this.entityManager
+				.createQuery("SELECT ae FROM AgendamentoEmail ae", AgendamentoEmail.class)
 				.getResultList();
 	}
 	
-	public void inserir(AgendamentoEmail email) {
+	public void insert(AgendamentoEmail email) {
 		this.entityManager.persist(email);
 	}
 	
-	public List<AgendamentoEmail> listarNaoAgendados() {
+	public List<AgendamentoEmail> listNotScheduled() {
 		return this.entityManager
-				.createQuery("SELECT ae FROM AgendamentoEmail ae WHERE ae.agendado = FALSE", AgendamentoEmail.class)
+				.createQuery("SELECT ae FROM AgendamentoEmail ae WHERE ae.scheduled = FALSE", AgendamentoEmail.class)
 				.getResultList();
 	}
 	
-	public void alterar(AgendamentoEmail agendamentoEmail) {
+	public void merge(AgendamentoEmail agendamentoEmail) {
 		this.entityManager.merge(agendamentoEmail);
 	}
 

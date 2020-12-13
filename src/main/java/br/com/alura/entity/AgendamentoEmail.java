@@ -1,4 +1,4 @@
-package br.com.alura.entidade;
+package br.com.alura.entity;
 
 import java.io.Serializable;
 
@@ -16,41 +16,49 @@ public class AgendamentoEmail implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String assunto;
-	private String email;
-	private Boolean agendado;
-	private String mensagem;
+	private String subject;
+	private String address;
+	private Boolean scheduled;
+	private String message;
 
-	public String getAssunto() {
-		return assunto;
-	}
-
-	public void setAssunto(String assunto) {
-		this.assunto = assunto;
+	public String getSubject() {
+		return subject;
 	}
 
-	public String getEmail() {
-		return email;
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public String getAddress() {
+		return address;
 	}
 
-	public Boolean getAgendado() {
-		return agendado;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public void setAgendado(Boolean agendado) {
-		this.agendado = agendado;
+	public Boolean getScheduled() {
+		return scheduled;
 	}
-	
-	public String getMensagem() {
-		return mensagem;
+
+	public void setScheduled(Boolean scheduled) {
+		this.scheduled = scheduled;
 	}
-	
-	public void setMensagem(String mensagem) {
-		this.mensagem = mensagem;
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	@Override

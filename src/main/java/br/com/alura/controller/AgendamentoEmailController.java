@@ -11,26 +11,26 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import br.com.alura.entidade.AgendamentoEmail;
-import br.com.alura.servico.AgendamentoEmailServico;
+import br.com.alura.entity.AgendamentoEmail;
+import br.com.alura.service.AgendamentoEmailService;
 
 @Path("emails")
 public class AgendamentoEmailController {
 
 	@Inject
-	private AgendamentoEmailServico servico;
+	private AgendamentoEmailService service;
 	
 	@GET
 	@Produces(value = MediaType.APPLICATION_JSON)
-	public Response listar() {
-		List<AgendamentoEmail> result = this.servico.list();
+	public Response list() {
+		List<AgendamentoEmail> result = this.service.list();
 		return Response.ok(result).build();
 	}
 	
 	@POST
 	@Consumes(value = MediaType.APPLICATION_JSON)
-	public Response inserir(AgendamentoEmail email) {
-		this.servico.inserir(email);
+	public Response insert(AgendamentoEmail email) {
+		this.service.insert(email);
 		return Response.status(201).build();
 	}
 	

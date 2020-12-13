@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
-import br.com.alura.entidade.AgendamentoEmail;
+import br.com.alura.entity.AgendamentoEmail;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.BEAN)
@@ -28,7 +28,7 @@ public class AgendamentoEmailDaoExampleTransaction {
 	 * @param agendamentoEmail - Object to merge, it must have ID.
 	 * 
 	 */
-	public void alterar(AgendamentoEmail agendamentoEmail) {
+	public void merge(AgendamentoEmail agendamentoEmail) {
 		try {
 			transaction.begin();
 			this.entityManager.merge(agendamentoEmail);
